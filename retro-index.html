@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DRUMS FM TV | Retro Broadcast</title>
+    <meta
+      name="description"
+      content="Retro CRT beat station with FM controls, neon arcade styling, inline playback, and a VHS-inspired television interface."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="scene" aria-hidden="true">
+      <video class="scene__video" id="backgroundVideo" autoplay muted loop playsinline>
+        <source src="video.mp4" type="video/mp4" />
+      </video>
+      <div class="scene__overlay"></div>
+      <div class="scene__stars"></div>
+      <div class="scene__fog"></div>
+      <div class="scene__mountains scene__mountains--back"></div>
+      <div class="scene__mountains scene__mountains--front"></div>
+      <div class="scene__objects">
+        <span class="scene__fire"></span>
+      </div>
+      <div class="scene__noise"></div>
+    </div>
+
+    <div class="app">
+      <header class="topbar">
+        <div class="topbar__left">
+          <button class="topbar__menu ui-button" id="menuToggle" type="button">
+            <span class="ui-button__dot"></span>
+            <span>Menu</span>
+          </button>
+          <div class="topbar__pill topbar__pill--live">On Air</div>
+        </div>
+
+        <div class="topbar__center">
+          <div class="station-title">
+            <span class="station-title__disc"></span>
+            <span>Neon Tape FM</span>
+          </div>
+
+          <div class="fm-controls">
+            <button class="ui-icon" id="prevBtn" type="button" aria-label="Previous FM track">|◁</button>
+            <button class="ui-icon ui-icon--play" id="playBtn" type="button" aria-label="Play or pause FM">▷</button>
+            <button class="ui-icon" id="nextBtn" type="button" aria-label="Next FM track">▷|</button>
+          </div>
+
+          <div class="topbar__track" id="trackIndicator">• Side A / Track 01</div>
+        </div>
+
+        <div class="topbar__right">
+          <div class="topbar__pill">CH 08</div>
+          <img class="topbar__logo" src="image.png" alt="DRUMS FM logo" />
+        </div>
+      </header>
+
+      <main class="tv-stage">
+        <section class="television" id="monitorShell">
+          <div class="television__frame">
+            <div class="television__inner">
+              <div class="television__screen" id="monitorScreen">
+                <div class="television__boot" id="tvBoot" aria-hidden="true"></div>
+                <div class="television__scanlines"></div>
+                <div class="television__glare"></div>
+                <div class="television__rgb"></div>
+                <div class="television__cursor" id="cursorGlow"></div>
+
+                <section class="view view--active" id="screenMenu">
+                  <div class="view__header">
+                    <p class="view__label">Broadcast Library</p>
+                    <h1>Choose a cassette</h1>
+                  </div>
+                  <div class="kit-menu" id="kitList"></div>
+                </section>
+
+                <section class="view" id="screenBeats">
+                  <div class="view__header view__header--beats">
+                    <div>
+                      <p class="view__label" id="beatsKicker">Tape Deck</p>
+                      <h1 id="beatsTitle">Night Vision Session</h1>
+                    </div>
+                    <button class="sub-button" id="backToMenu" type="button">← Channel List</button>
+                  </div>
+
+                  <div class="beat-layout">
+                    <div class="beat-list" id="beatsList"></div>
+
+                    <aside class="player-card">
+                      <p class="player-card__label">Deck A</p>
+                      <h2 id="beatNowPlaying">Night Vision Beat 01</h2>
+                      <p class="player-card__copy" id="beatsDescription">
+                        Queue a beat into the CRT deck and preview it without leaving the broadcast.
+                      </p>
+                      <code class="player-card__path" id="pathDisplay">beats/night-vision-01.mp3</code>
+                      <p class="player-card__hint" id="currentBeatHint">Pick a tape and press play.</p>
+
+                      <div class="player-actions">
+                        <button class="player-button player-button--ghost" id="beatPrevBtn" type="button">|◁</button>
+                        <button class="player-button player-button--play" id="beatPlayBtn" type="button">Play Tape</button>
+                        <button class="player-button player-button--ghost" id="beatNextBtn" type="button">▷|</button>
+                      </div>
+
+                      <div class="spectrum" id="beatSpectrum" aria-hidden="true"></div>
+
+                      <div class="player-meta-actions">
+                        <button class="sub-button" id="beatInfoBtn" type="button">Info</button>
+                        <button class="sub-button sub-button--buy" id="beatBuyBtn" type="button">Order</button>
+                        <button class="sub-button" id="beatMenuBtn" type="button">Menu</button>
+                      </div>
+
+                      <div class="player-progress">
+                        <div class="player-progress__bar"><span id="beatProgressBar"></span></div>
+                        <div class="player-progress__meta">
+                          <span id="beatTimeCurrent">0:00</span>
+                          <span id="beatTimeDuration">0:00</span>
+                        </div>
+                      </div>
+                    </aside>
+                  </div>
+                </section>
+
+                <section class="view" id="screenSignup">
+                  <div class="view__header view__header--centered">
+                    <p class="view__label">Bonus Broadcast</p>
+                    <h1>Claim the Midnight Sample Pack</h1>
+                  </div>
+
+                  <div class="signup-card">
+                    <p class="signup-card__text">
+                      Drop your details below and get the free retro-ready stash delivered like a late-night radio giveaway.
+                    </p>
+                    <form class="signup-form">
+                      <input type="text" placeholder="Name" />
+                      <input type="email" placeholder="Email Address" />
+                      <button type="submit">Unlock Pack</button>
+                    </form>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+
+          <div class="tv-base">
+            <button class="tv-base__button" id="baseButton" type="button">Open Midnight Pack</button>
+            <div class="tv-base__meta">
+              <span id="activePackName">Night Vision</span>
+              <span id="fmTrackTitle">Side A / Track 01</span>
+              <span id="fmState">Standby</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="kitButtonTemplate">
+      <button class="kit-button" type="button">
+        <span class="kit-button__title"></span>
+      </button>
+    </template>
+
+    <template id="beatButtonTemplate">
+      <button class="beat-button" type="button">
+        <span class="beat-button__title"></span>
+        <span class="beat-button__path"></span>
+      </button>
+    </template>
+
+    <audio id="beatAudio" preload="none"></audio>
+    <audio id="fmAudio" preload="none"></audio>
+
+    <script src="script.js"></script>
+  </body>
+</html>
